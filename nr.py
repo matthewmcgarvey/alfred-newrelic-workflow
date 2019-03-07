@@ -1,25 +1,86 @@
 # encoding: utf-8
 import sys
-from workflow import Workflow3, ICON_WEB, web
-def main(wf):
-    url = 'https://hacker-news.firebaseio.com/v0/topstories.json'
-    r = web.get(url)
+from workflow import Workflow3, ICON_WEB, web, ICON_WARNING, ICON_ERROR, ICON_NETWORK
+
+log = None
+nrid = None
+nrkey = None
+
+def require_setup(wf):
+    if nrid is None:
+        wf.add_item(
+            "must supply a new relic id: nr_id",
+            icon=ICON_ERROR)
+    if nrkey is None:
+        wf.add_item(
+            "must supply a new relic api key: nr_key",
+            icon=ICON_ERROR)
+    if len(wf._items) > 0:
+        wf.send_feedback()
+        sys.exit(1)
+
+def get_apps(wf):
+    apps = wf.stored_data("apps")
+    if apps is not None:
+        return apps
+    r = web.get('https://api.newrelic.com/v2/applications.json', headers={'X-Api-Key': nrkey})
     r.raise_for_status()
+    apps = r.json()['applications']
+    apps = list(filter(lambda app: app['health_status'] == 'orange' or app['health_status'] == 'red' or app['health_status'] == 'green', apps))
+    wf.store_data('apps', apps)
+    return apps
 
-    ids = r.json()[:10]
+def get_icon(app):
+    health = app['health_status']
+    if health == 'orange':
+        return ICON_WARNING
+    elif health == 'red':
+        return ICON_ERROR
+    elif health == 'green':
+        return wf.workflowdir + '/good.png'
 
-    for id in ids:
-      response = web.get('https://hacker-news.firebaseio.com/v0/item/%s.json' % id)
-      response.raise_for_status()
-      title = response.json()['title']
-      url = 'https://news.ycombinator.com/item?id=%s' % id
-      wf.add_item(title=title,
-                  subtitle=url,
-                  arg=url,
-                  icon=ICON_WEB,
-                  valid=True)
-    wf.send_feedback()
+def main(wf):
+    args = wf.args
+    keyword = args[0]
+
+    if keyword == '--id':
+        wf.store_data("id", args[1])
+        return
+    elif keyword == '--key':
+        wf.store_data("key", args[1])
+        return
+    elif keyword == '--app':
+        log.debug("ARGS LENGTH: ")
+        log.debug(len(args))
+        log.debug("^^^^^")
+        require_setup(wf)
+        apps = get_apps(wf)
+        if len(args) > 1:
+            query = " ".join(args[1:])
+            apps = wf.filter(query, apps, key=lambda app: app['name'])
+            if not apps:
+                wf.add_item('No matching app found', 'Try a different query', icon=ICON_WARNING)
+                wf.send_feedback()
+                return
+        for app in apps:
+            url = 'https://rpm.newrelic.com/accounts/%s/applications/%d' % (nrid, app['id'])
+            wf.add_item(
+                app['name'],
+                subtitle='ID: %d | Language: %s' % (app['id'], app['language']),
+                arg=url,
+                icon=get_icon(app),
+                valid=True,
+                uid=url
+            )
+        wf.send_feedback()
+        return
+    elif keyword == '--refresh':
+        wf.clear_data(lambda f: 'apps' in f)
+        get_apps(wf)
 
 if __name__ == u"__main__":
     wf = Workflow3(libraries=['./lib'])
+    log = wf.logger
+    nrid = wf.stored_data('id')
+    nrkey = wf.stored_data('key')
     sys.exit(wf.run(main))

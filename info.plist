@@ -6,6 +6,45 @@
 	<string></string>
 	<key>connections</key>
 	<dict>
+		<key>BBB2F8DB-A12D-402D-9D9C-524B682DB881</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>41C4FB30-4627-4351-90A2-BC86BEE8995D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CDAE7546-D856-4D83-996D-D44F6E91A555</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>670D6FDF-8A32-4DFD-BFDA-2BD2536281DC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D125E32D-B469-4BD8-B70C-A1A16C190B87</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E61D4E06-23DF-443D-9E8A-A56F2C2EE234</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F32B16BE-138F-4523-960F-775878AA1D76</key>
 		<array>
 			<dict>
@@ -33,27 +72,8 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>F7E06437-96E8-4AE7-82A4-237FD0B7403F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttrimmode</key>
@@ -75,9 +95,9 @@
 				<key>runningsubtext</key>
 				<string>Unfortunately this is a slow operation so be patient...</string>
 				<key>script</key>
-				<string>python nr.py</string>
+				<string>python nr.py --app {query}</string>
 				<key>scriptargtype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
@@ -96,11 +116,204 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python nr.py --refresh</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>670D6FDF-8A32-4DFD-BFDA-2BD2536281DC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F7E06437-96E8-4AE7-82A4-237FD0B7403F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>nr_update</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Update New Relic apps list</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CDAE7546-D856-4D83-996D-D44F6E91A555</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python nr.py --id {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E61D4E06-23DF-443D-9E8A-A56F2C2EE234</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>nr_id</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>New Relic Team ID</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D125E32D-B469-4BD8-B70C-A1A16C190B87</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python nr.py --key {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>41C4FB30-4627-4351-90A2-BC86BEE8995D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>nr_key</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>New Relic API Key</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BBB2F8DB-A12D-402D-9D9C-524B682DB881</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>41C4FB30-4627-4351-90A2-BC86BEE8995D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>410</integer>
+		</dict>
+		<key>670D6FDF-8A32-4DFD-BFDA-2BD2536281DC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>860</integer>
+			<key>ypos</key>
+			<integer>130</integer>
+		</dict>
+		<key>BBB2F8DB-A12D-402D-9D9C-524B682DB881</key>
+		<dict>
+			<key>xpos</key>
+			<integer>250</integer>
+			<key>ypos</key>
+			<integer>410</integer>
+		</dict>
+		<key>CDAE7546-D856-4D83-996D-D44F6E91A555</key>
+		<dict>
+			<key>xpos</key>
+			<integer>680</integer>
+			<key>ypos</key>
+			<integer>130</integer>
+		</dict>
+		<key>D125E32D-B469-4BD8-B70C-A1A16C190B87</key>
+		<dict>
+			<key>xpos</key>
+			<integer>250</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
+		<key>E61D4E06-23DF-443D-9E8A-A56F2C2EE234</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
 		<key>F32B16BE-138F-4523-960F-775878AA1D76</key>
 		<dict>
 			<key>xpos</key>
