@@ -1,6 +1,6 @@
 # encoding: utf-8
 import sys
-from workflow import Workflow3, ICON_WEB, web, ICON_WARNING, ICON_ERROR, ICON_NETWORK
+from workflow import Workflow3, web, ICON_WARNING, ICON_ERROR
 
 log = None
 nrid = None
@@ -29,15 +29,6 @@ def get_apps(wf):
     apps = list(filter(lambda app: app['health_status'] == 'orange' or app['health_status'] == 'red' or app['health_status'] == 'green', apps))
     wf.store_data('apps', apps)
     return apps
-
-def get_icon(app):
-    health = app['health_status']
-    if health == 'orange':
-        return ICON_WARNING
-    elif health == 'red':
-        return ICON_ERROR
-    elif health == 'green':
-        return wf.workflowdir + '/good.png'
 
 def main(wf):
     args = wf.args
@@ -68,7 +59,6 @@ def main(wf):
                 app['name'],
                 subtitle='ID: %d | Language: %s' % (app['id'], app['language']),
                 arg=url,
-                icon=get_icon(app),
                 valid=True,
                 uid=url
             )
