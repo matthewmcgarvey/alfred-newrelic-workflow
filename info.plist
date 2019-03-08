@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string></string>
+	<string>com.mmcgarvey.newrelic</string>
 	<key>connections</key>
 	<dict>
 		<key>BBB2F8DB-A12D-402D-9D9C-524B682DB881</key>
@@ -60,13 +60,13 @@
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string></string>
+	<string>Matthew McGarvey</string>
 	<key>description</key>
 	<string></string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>nr</string>
+	<string>New Relic</string>
 	<key>objects</key>
 	<array>
 		<dict>
